@@ -23,7 +23,7 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Medewerker (
-    mederwerker_id int not null,
+    medewerkers_id int not null,
     account_id int,
 	naam varchar(255) not null,
     tussenvoegsel varchar (255),
@@ -48,6 +48,48 @@ CREATE TABLE Klant (
     PRIMARY KEY(klant_id),
     FOREIGN KEY(account_id) REFERENCES Account(account_id)
 );
+
+create table Artikel (
+    artikel_id int not null,
+    artikel VARCHAR(255) not null,
+    Prijs varchar(255) not null
+);
+
+create table Winkel(
+    winkel_id int not null,
+    vestiging varchar(255) not null,
+    vestigingplaats varchar(255) not null,
+    adres varchar(255) not null,
+    postcode varchar(255) not null,
+    telefoonnummer varchar(255) not null,
+    created_at DATE,
+    updated_at TIMESTAMP,
+);
+
+create table Bestelling(
+    bestelling_id int not null,
+    Artikel varchar(255) not null,
+    Winkel varchar(255) not null,
+    Aantal varchar(255) not null,
+    Klant varchar(255) not null,
+    Medewerker varchar(255) not null,
+    created_at DATE,
+    updated_at TIMESTAMP,
+);
+
+create table Factuur(
+    factuur_id int not null,
+    Factuurregel varchar(255) not null,
+    Factuurdatum varchar(255) not null,
+    Klant varchar(255) not null
+);
+
+create table Factuurregel(
+    factuurregel_id int not null,
+    Artikel varchar(255) not null,
+    Aantal varchar(255) not null
+);
+
 
 Insert into Account(email, password)
 Values ('Rianne@inmail.com','1234');
