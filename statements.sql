@@ -1,6 +1,6 @@
-Drop database if EXISTS flowerpower1;
-Create database flowerpower1;
-use flowerpower1;
+Drop database if EXISTS flowerpower;
+Create database flowerpower;
+use flowerpower;
 
 CREATE TABLE usertype (
     usertype_id int not null,
@@ -10,7 +10,7 @@ CREATE TABLE usertype (
     PRIMARY KEY(usertype_id)
 );
 
-CREATE TABLE Account (
+CREATE TABLE account (
     account_id int not null,
     type int,
 	email varchar(255) not null,
@@ -22,7 +22,7 @@ CREATE TABLE Account (
     Foreign Key (type) REFERENCES Usertype(usertype_id)
 );
 
-CREATE TABLE Medewerker (
+CREATE TABLE medewerker (
     medewerkers_id int not null,
     account_id int,
 	naam varchar(255) not null,
@@ -32,11 +32,11 @@ CREATE TABLE Medewerker (
     admin INT not null,
     created_at DATE,
     updated_at TIMESTAMP,
-    PRIMARY KEY(medewerker_id),
+    PRIMARY KEY(medewerkers_id),
     FOREIGN KEY(account_id) REFERENCES Account(account_id)
 );
 
-CREATE TABLE Klant (
+CREATE TABLE klant (
     klant_id int not null,
     account_id int,
 	naam varchar(255) not null,
@@ -49,13 +49,18 @@ CREATE TABLE Klant (
     FOREIGN KEY(account_id) REFERENCES Account(account_id)
 );
 
-create table Artikel (
+create table artikel (
     artikel_id int not null,
+    account_id int,
     artikel VARCHAR(255) not null,
-    Prijs varchar(255) not null
+    Prijs varchar(255) not null,
+    created_at DATE,
+    updated_at TIMESTAMP,
+    PRIMARY KEY(artikel_id),
+    Foreign Key(account_id) REFERENCES Account(account_id)
 );
 
-create table Winkel(
+create table winkel(
     winkel_id int not null,
     vestiging varchar(255) not null,
     vestigingplaats varchar(255) not null,
@@ -64,9 +69,10 @@ create table Winkel(
     telefoonnummer varchar(255) not null,
     created_at DATE,
     updated_at TIMESTAMP,
+    PRIMARY KEY(winkel_id)
 );
 
-create table Bestelling(
+create table bestelling(
     bestelling_id int not null,
     Artikel varchar(255) not null,
     Winkel varchar(255) not null,
@@ -75,19 +81,26 @@ create table Bestelling(
     Medewerker varchar(255) not null,
     created_at DATE,
     updated_at TIMESTAMP,
+    PRIMARY KEY (bestelling_id)
 );
 
-create table Factuur(
+create table factuur(
     factuur_id int not null,
     Factuurregel varchar(255) not null,
     Factuurdatum varchar(255) not null,
-    Klant varchar(255) not null
+    Klant varchar(255) not null,
+    created_at DATE,
+    updated_at TIMESTAMP,
+    PRIMARY KEY(factuur_id)
 );
 
-create table Factuurregel(
+create table factuurregel(
     factuurregel_id int not null,
     Artikel varchar(255) not null,
-    Aantal varchar(255) not null
+    Aantal varchar(255) not null,
+    created_at DATE,
+    updated_at TIMESTAMP,
+    PRIMARY KEY(factuurregel_id)
 );
 
 
