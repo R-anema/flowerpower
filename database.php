@@ -25,19 +25,16 @@ class database{
 		$dsn = "mysql:host-$this->$host;dbname-$this->$database;charset-$this->charset";
 		$this->db = new PDO($dsn, $this->$username, $this->$password);
 		echo 'Succesfully connected';
-	} //error opvangen
-	catch(PDOexception $e){
+	} //erroropvangen
+		catch(PDOexception $e){
 		$e->getMessage();
 		exit('an error occured');
-	} if (isset($_POST ['signup.php'])) {
+	}if (isset($_POST ['signup.php'])) {
 		//hier alle input values van de form. Dit misschien naar signup sturen.
-
-	}	catch(PDOException $e){
-		// die and exit are equivalent
-		// exit-> Output a message and terminate the current script
-		die("Unable to connect: " . $e->getMessage());
+	}catch(PDOException $e){
+		// die and exit are equivalent exit-> Output a message and terminate the current script
+		exit('Unable to connect:' . $e->getMessage());
 	}
-
 
 	//if signup word aangeroepen: account aanmaken moet in signup en insert into ook gebruiken. TBA Singup checken of hij word aangeroepen, en afstemmen met.
 	public function addAcount($voornaam, $tussenvoegsel, $achternaam, $email, $username, $password){
@@ -48,7 +45,6 @@ class database{
 			//TODO: wachtwoord en username ophalen/registeren. 
 			$this->db = new PDO($dsn, $this->$username, $this->$password);
 		}
-
 	}
 
 	private function is_admin($username){
@@ -63,11 +59,9 @@ class database{
         if($result['type_id'] == self::ADMIN){
             return true;
         }
-
         // user is not admin
         return false;
     }
-
 };
 
 ?>
